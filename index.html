@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reloj analógico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #091900;
+        }
+        
+        .reloj {
+            width: 350px;
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url(reloj.png);
+            background-size: cover;
+            border: 4px solid #091600;
+            border-radius: 50%;
+            box-shadow: 0 -15px -15px rgba(255, 255, 255, .05), inset 0 -15px -15px rgba(255, 255, 255, .05), 0 15px 15px rgba(0, 0, 0, .03), inset 0 -15px -15px rgba(255, 255, 255, .03);
+        }
+        
+        .reloj::before {
+            content: " ";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #888888;
+            border-radius: 50%;
+            z-index: 10000;
+        }
+        
+        .reloj .horas,
+        .reloj .minutos,
+        .reloj .segundos {
+            position: absolute;
+        }
+        
+        .reloj .horas,
+        .hs {
+            width: 160px;
+            height: 160px;
+        }
+        
+        .reloj .minutos,
+        .ms {
+            width: 190px;
+            height: 190px;
+        }
+        
+        .reloj .segundos,
+        .s {
+            width: 230px;
+            height: 230px;
+        }
+        
+        .hs,
+        .ms,
+        .s {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            border-radius: 50%;
+        }
+        
+        .hs::before {
+            content: " ";
+            position: absolute;
+            width: 8px;
+            height: 80px;
+            background: #ff105e;
+            z-index: 10;
+            border-radius: 6px;
+        }
+        
+        .ms::before {
+            content: " ";
+            position: absolute;
+            width: 4px;
+            height: 90px;
+            background: #ffffff;
+            z-index: 11;
+            border-radius: 6px;
+        }
+        
+        .s::before {
+            content: " ";
+            position: absolute;
+            width: 2px;
+            height: 150px;
+            background: #ffffff;
+            z-index: 12;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reloj">
+        <div class="horas">
+            <div class="hs" id="hs"></div>
+        </div>
+        <div class="minutos">
+            <div class="ms" id="ms"></div>
+        </div>
+        <div class="segundos">
+            <div class="s" id="s"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const deg = 6;
+        const hs = document.querySelector('#hs');
+        const ms = document.querySelector('#ms');
+        const s = document.querySelector('#s');
+
+        setInterval(() => {
+            let dia = new Date();
+            let hh = dia.getHours() * 30;
+            let mm = dia.getMinutes() * deg;
+            let ss = dia.getSeconds() * deg;
+
+            hs.style.transform = `rotateZ(${(hh)+(mm/12)}deg)`;
+            ms.style.transform = `rotateZ(${mm}deg)`;
+            s.style.transform = `rotateZ(${ss}deg)`;
+        });
+    </script>
+</body>
+
+</html>
